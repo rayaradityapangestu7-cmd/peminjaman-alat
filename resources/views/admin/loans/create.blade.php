@@ -39,7 +39,7 @@
 
         <div class="mb-3">
             <label for="tanggal_kembali" class="form-label">Tanggal Kembali Rencana</label>
-            <input type="date" class="form-control @error('tanggal_kembali') is-invalid @enderror" 
+            <input type="date" class="form-control @error('tanggal_kembali') is-invalid @enderror"
                    id="tanggal_kembali" name="tanggal_kembali" value="{{ old('tanggal_kembali') }}" required>
             @error('tanggal_kembali')
                 <span class="invalid-feedback">{{ $message }}</span>

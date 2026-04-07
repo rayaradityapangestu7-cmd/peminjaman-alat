@@ -7,7 +7,7 @@
     <div class="card mt-3">
         <div class="card-body">
             <h5 class="card-title">Informasi Peminjaman</h5>
-            
+
             <div class="mb-3">
                 <label class="form-label">User (Peminjam)</label>
                 <p>{{ $loan->user->name ?? '-' }}</p>

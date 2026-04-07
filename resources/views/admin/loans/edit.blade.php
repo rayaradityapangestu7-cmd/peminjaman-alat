@@ -10,8 +10,8 @@
 
         <div class="mb-3">
             <label for="tanggal_kembali_rencana" class="form-label">Tanggal Kembali Rencana</label>
-            <input type="date" class="form-control @error('tanggal_kembali_rencana') is-invalid @enderror" 
-                   id="tanggal_kembali_rencana" name="tanggal_kembali_rencana" 
+            <input type="date" class="form-control @error('tanggal_kembali_rencana') is-invalid @enderror"
+                   id="tanggal_kembali_rencana" name="tanggal_kembali_rencana"
                    value="{{ old('tanggal_kembali_rencana', $loan->tanggal_kembali_rencana->format('Y-m-d')) }}" required>
             @error('tanggal_kembali_rencana')
                 <span class="invalid-feedback">{{ $message }}</span>

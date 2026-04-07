@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\ActivityLog;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,6 +14,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::withCount('tools')->latest()->paginate(10);
+
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -31,14 +32,14 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_kategori' => 'required|string|max:255|unique:categories,nama_kategori'
+            'nama_kategori' => 'required|string|max:255|unique:categories,nama_kategori',
         ]);
 
         Category::create([
-            'nama_kategori' => $request->nama_kategori
+            'nama_kategori' => $request->nama_kategori,
         ]);
 
-        ActivityLog::record('Tambah Kategori', 'Menambah kategori: ' . $request->nama_kategori);
+        ActivityLog::record('Tambah Kategori', 'Menambah kategori: '.$request->nama_kategori);
 
         return redirect()->route('categories.index')->with('success', 'Kategori berhasil ditambahkan.');
     }
@@ -57,15 +58,15 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'nama_kategori' => 'required|string|max:255|unique:categories,nama_kategori,' . $category->id
+            'nama_kategori' => 'required|string|max:255|unique:categories,nama_kategori,'.$category->id,
         ]);
 
         $oldName = $category->nama_kategori;
         $category->update([
-            'nama_kategori' => $request->nama_kategori
+            'nama_kategori' => $request->nama_kategori,
         ]);
 
-        ActivityLog::record('Update Kategori', "Mengubah kategori $oldName menjadi " . $request->nama_kategori);
+        ActivityLog::record('Update Kategori', "Mengubah kategori $oldName menjadi ".$request->nama_kategori);
 
         return redirect()->route('categories.index')->with('success', 'Kategori diperbarui.');
     }
@@ -82,7 +83,7 @@ class CategoryController extends Controller
         $nama = $category->nama_kategori;
         $category->delete();
 
-        ActivityLog::record('Hapus Kategori', 'Menghapus kategori: ' . $nama);
+        ActivityLog::record('Hapus Kategori', 'Menghapus kategori: '.$nama);
 
         return redirect()->route('categories.index')->with('success', 'Kategori berhasil dihapus.');
     }

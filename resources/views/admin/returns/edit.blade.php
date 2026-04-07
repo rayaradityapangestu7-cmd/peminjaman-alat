@@ -10,8 +10,8 @@
 
         <div class="mb-3">
             <label for="tanggal_kembali_aktual" class="form-label">Tanggal Kembali Aktual</label>
-            <input type="datetime-local" class="form-control @error('tanggal_kembali_aktual') is-invalid @enderror" 
-                   id="tanggal_kembali_aktual" name="tanggal_kembali_aktual" 
+            <input type="datetime-local" class="form-control @error('tanggal_kembali_aktual') is-invalid @enderror"
+                   id="tanggal_kembali_aktual" name="tanggal_kembali_aktual"
                    value="{{ old('tanggal_kembali_aktual', $loan->tanggal_kembali_aktual ? $loan->tanggal_kembali_aktual->format('Y-m-d\TH:i') : now()->format('Y-m-d\TH:i')) }}" required>
             @error('tanggal_kembali_aktual')
                 <span class="invalid-feedback">{{ $message }}</span>

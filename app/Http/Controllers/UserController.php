@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\ActivityLog;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,8 +19,8 @@ class UserController extends Controller
         $query = User::query();
 
         if ($request->has('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%')
-                ->orWhere('email', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%')
+                ->orWhere('email', 'like', '%'.$request->search.'%');
         }
 
         $users = $query->latest()->paginate(10);
@@ -42,20 +42,20 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
-            'role'     => 'required|in:admin,petugas,peminjam',
+            'role' => 'required|in:admin,petugas,peminjam',
         ]);
 
         $user = User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
+            'name' => $request->name,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role'     => $request->role,
+            'role' => $request->role,
         ]);
 
-        ActivityLog::record('Tambah User', 'Menambahkan user baru: ' . $user->name . ' (' . $user->role . ')');
+        ActivityLog::record('Tambah User', 'Menambahkan user baru: '.$user->name.' ('.$user->role.')');
 
         return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan.');
     }
@@ -74,16 +74,16 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email,' . $user->id,
-            'role'     => 'required|in:admin,petugas,peminjam',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'role' => 'required|in:admin,petugas,peminjam',
             'password' => 'nullable|min:6', // Password boleh kosong jika tidak ingin diganti
         ]);
 
         $data = [
-            'name'  => $request->name,
+            'name' => $request->name,
             'email' => $request->email,
-            'role'  => $request->role,
+            'role' => $request->role,
         ];
 
         // Jika password diisi, update password baru
@@ -93,7 +93,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        ActivityLog::record('Update User', 'Memperbarui data user: ' . $user->name);
+        ActivityLog::record('Update User', 'Memperbarui data user: '.$user->name);
 
         return redirect()->route('users.index')->with('success', 'Data user diperbarui.');
     }
@@ -111,7 +111,7 @@ class UserController extends Controller
         $nama = $user->name;
         $user->delete();
 
-        ActivityLog::record('Hapus User', 'Menghapus user: ' . $nama);
+        ActivityLog::record('Hapus User', 'Menghapus user: '.$nama);
 
         return redirect()->route('users.index')->with('success', 'User berhasil dihapus.');
     }

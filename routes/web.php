@@ -1,27 +1,32 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminLoanController;
 use App\Http\Controllers\AdminReturnController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\PeminjamController;
+use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ToolController;
 use App\Http\Controllers\UserController;
 use App\Models\ActivityLog;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 // Login & Logout (Semua Role)
 Route::get('/', function () {
     if (Auth::check()) {
         $role = Auth::user()->role;
-        if ($role == 'admin') return redirect('/admin/dashboard');
-        if ($role == 'petugas') return redirect('/petugas/dashboard');
+        if ($role == 'admin') {
+            return redirect('/admin/dashboard');
+        }
+        if ($role == 'petugas') {
+            return redirect('/petugas/dashboard');
+        }
+
         return redirect('/peminjam/dashboard');
     }
-    
+
     return view('welcome');
 })->name('home');
 
@@ -35,7 +40,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('tools', ToolController::class);
     Route::resource('categories', CategoryController::class);
-    
+
     // ADMIN LOANS - EKSPLISIT
     Route::get('/admin/loans', [AdminLoanController::class, 'index'])->name('admin.loans.index');
     Route::get('/admin/loans/create', [AdminLoanController::class, 'create'])->name('admin.loans.create');
@@ -44,7 +49,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/loans/{loan}/edit', [AdminLoanController::class, 'edit'])->name('admin.loans.edit');
     Route::put('/admin/loans/{loan}', [AdminLoanController::class, 'update'])->name('admin.loans.update');
     Route::delete('/admin/loans/{loan}', [AdminLoanController::class, 'destroy'])->name('admin.loans.destroy');
-    
+
     // ADMIN RETURNS
     Route::get('/admin/returns', [AdminReturnController::class, 'index'])->name('admin.returns.index');
     Route::get('/admin/returns/create', [AdminReturnController::class, 'create'])->name('admin.returns.create');
@@ -53,9 +58,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/returns/{return}/edit', [AdminReturnController::class, 'edit'])->name('admin.returns.edit');
     Route::put('/admin/returns/{return}', [AdminReturnController::class, 'update'])->name('admin.returns.update');
     Route::delete('/admin/returns/{return}', [AdminReturnController::class, 'destroy'])->name('admin.returns.destroy');
-    
-    Route::get('/admin/logs', function() {
+
+    Route::get('/admin/logs', function () {
         $logs = ActivityLog::with('user')->latest()->get();
+
         return view('admin.logs', compact('logs'));
     })->name('admin.logs');
 });

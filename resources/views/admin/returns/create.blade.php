@@ -24,7 +24,7 @@
 
         <div class="mb-3">
             <label for="denda" class="form-label">Denda (Opsional)</label>
-            <input type="number" class="form-control @error('denda') is-invalid @enderror" 
+            <input type="number" class="form-control @error('denda') is-invalid @enderror"
                    id="denda" name="denda" value="{{ old('denda') }}" min="0">
             @error('denda')
                 <span class="invalid-feedback">{{ $message }}</span>

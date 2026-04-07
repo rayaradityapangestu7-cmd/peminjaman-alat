@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tool;
-use App\Models\Category;
 use App\Models\ActivityLog;
+use App\Models\Category;
+use App\Models\Tool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,6 +28,7 @@ class ToolController extends Controller
     public function create()
     {
         $categories = Category::all(); // Kita butuh data kategori untuk dropdown
+
         return view('admin.tools.create', compact('categories'));
     }
 
@@ -38,11 +39,11 @@ class ToolController extends Controller
     {
         // 1. Validasi Input
         $request->validate([
-            'nama_alat'   => 'required|string|max:255',
+            'nama_alat' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
-            'stok'        => 'required|integer|min:0',
-            'gambar'      => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Max 2MB
-            'deskripsi'   => 'nullable|string'
+            'stok' => 'required|integer|min:0',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Max 2MB
+            'deskripsi' => 'nullable|string',
         ]);
 
         // 2. Handle Upload Gambar (Jika ada)
@@ -54,15 +55,15 @@ class ToolController extends Controller
 
         // 3. Simpan ke Database
         Tool::create([
-            'nama_alat'   => $request->nama_alat,
+            'nama_alat' => $request->nama_alat,
             'category_id' => $request->category_id,
-            'stok'        => $request->stok,
-            'deskripsi'   => $request->deskripsi,
-            'gambar'      => $gambarPath
+            'stok' => $request->stok,
+            'deskripsi' => $request->deskripsi,
+            'gambar' => $gambarPath,
         ]);
 
         // 4. Catat Log
-        ActivityLog::record('Tambah Alat', 'Menambahkan alat baru: ' . $request->nama_alat);
+        ActivityLog::record('Tambah Alat', 'Menambahkan alat baru: '.$request->nama_alat);
 
         return redirect()->route('tools.index')->with('success', 'Alat berhasil ditambahkan.');
     }
@@ -73,6 +74,7 @@ class ToolController extends Controller
     public function edit(Tool $tool)
     {
         $categories = Category::all();
+
         return view('admin.tools.edit', compact('tool', 'categories'));
     }
 
@@ -82,11 +84,11 @@ class ToolController extends Controller
     public function update(Request $request, Tool $tool)
     {
         $request->validate([
-            'nama_alat'   => 'required|string|max:255',
+            'nama_alat' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
-            'stok'        => 'required|integer|min:0',
-            'gambar'      => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'deskripsi'   => 'nullable|string'
+            'stok' => 'required|integer|min:0',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'deskripsi' => 'nullable|string',
         ]);
 
         $data = $request->except(['gambar']);
@@ -103,7 +105,7 @@ class ToolController extends Controller
 
         $tool->update($data);
 
-        ActivityLog::record('Update Alat', 'Memperbarui data alat: ' . $tool->nama_alat);
+        ActivityLog::record('Update Alat', 'Memperbarui data alat: '.$tool->nama_alat);
 
         return redirect()->route('tools.index')->with('success', 'Data alat diperbarui.');
     }
@@ -121,7 +123,7 @@ class ToolController extends Controller
         $namaAlat = $tool->nama_alat;
         $tool->delete();
 
-        ActivityLog::record('Hapus Alat', 'Menghapus alat: ' . $namaAlat);
+        ActivityLog::record('Hapus Alat', 'Menghapus alat: '.$namaAlat);
 
         return redirect()->route('tools.index')->with('success', 'Alat berhasil dihapus.');
     }
