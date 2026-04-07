@@ -4,86 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Peminjaman Alat</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+            background: linear-gradient(180deg, #f8fafc 0%, #e9eff5 100%);
+        }
         .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-url('https://source.unsplash.com/1600x900/?laboratory,workshop');
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.95), rgba(13, 110, 253, 0.7)),
+                url('https://source.unsplash.com/1600x900/?laboratory,workshop');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 100px 0;
-            border-radius: 0 0 20px 20px;
+            border-radius: 2rem;
+            padding: 80px 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 24px 80px rgba(15, 23, 42, 0.14);
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(255,255,255,0.18), transparent 35%);
+        }
+        .hero-section .container {
+            position: relative;
+            z-index: 1;
+        }
+        .feature-card {
+            border: none;
+            border-radius: 1.5rem;
+            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+        }
+        .feature-card .card-body {
+            min-height: 180px;
         }
         .feature-icon {
-            font-size: 2rem;
-            color: #0d6efd;
+            width: 60px;
+            height: 60px;
+            border-radius: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(13, 110, 253, 0.12);
             margin-bottom: 1rem;
         }
     </style>
 </head>
-<body class="bg-light">
+<body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">SIPINJAM</a>
-            <div class="ms-auto">
-                <a href="{{ route('login') }}" class="btn btn-primary px-4">Login</a>
+            <a class="navbar-brand fw-bold" href="{{ route('home') }}">SIPINJAM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#welcomeNavbar" aria-controls="welcomeNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="welcomeNavbar">
+                <div class="ms-auto">
+                    <a href="{{ route('login') }}" class="btn btn-light btn-sm">Login</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <div class="hero-section text-center mb-5">
-        <div class="container">
-            <h1 class="display-4 fw-bold">Peminjaman Alat Jadi Lebih Mudah</h1>
-            <p class="lead mb-4">Sistem manajemen peminjaman alat laboratorium dan bengkel sekolah yang
-terintegrasi, cepat, dan transparan.</p>
-            <a href="{{ route('login') }}" class="btn btn-lg btn-warning fw-bold px-5">Mulai
-Peminjaman</a>
-        </div>
-    </div>
-
-    <div class="container mb-5">
-        <div class="row text-center">
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm border-0 py-4">
-                    <div class="card-body">
-                        <div class="feature-icon">   </div>
-                        <h4 class="card-title">Cari Alat</h4>
-                        <p class="card-text text-muted">Cek ketersediaan stok alat secara real-time tanpa
-perlu bolak-balik ke ruang penyimpanan.</p>
+    <main class="container py-5">
+        <section class="hero-section mb-5 text-white text-center text-md-start">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <h1 class="display-5 fw-bold mb-3">Kelola peminjaman alat lebih cepat dan modern.</h1>
+                        <p class="lead text-white-75 mb-4">Sistem terpadu untuk sekolah dan laboratorium agar proses pinjam, setujui, dan kembalikan alat lebih mudah.</p>
+                        <a href="{{ route('login') }}" class="btn btn-warning btn-lg shadow-sm">Mulai Sekarang</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm border-0 py-4">
-                    <div class="card-body">
-                        <div class="feature-icon">         </div>
-                        <h4 class="card-title">Ajukan Pinjaman</h4>
-                        <p class="card-text text-muted">Proses pengajuan peminjaman yang praktis melalui
-sistem dan persetujuan petugas yang cepat.</p>
+        </section>
 
-
-                    </div>
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="card feature-card p-4">
+                    <div class="feature-icon text-primary">✓</div>
+                    <h5 class="fw-semibold">Kelola Stok dengan Mudah</h5>
+                    <p class="text-muted mb-0">Lihat ketersediaan alat dan atur kategori tanpa repot.</p>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm border-0 py-4">
-                    <div class="card-body">
-                        <div class="feature-icon">   </div>
-                        <h4 class="card-title">Pengembalian</h4>
-                        <p class="card-text text-muted">Sistem monitoring pengembalian alat yang
-terstruktur untuk menghindari kehilangan aset.</p>
-                    </div>
+            <div class="col-md-4">
+                <div class="card feature-card p-4">
+                    <div class="feature-icon text-success">⚡</div>
+                    <h5 class="fw-semibold">Proses Peminjaman Cepat</h5>
+                    <p class="text-muted mb-0">Ajukan dan setujui pinjaman dalam satu sistem yang responsif.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card feature-card p-4">
+                    <div class="feature-icon text-warning">🔄</div>
+                    <h5 class="fw-semibold">Pantau Pengembalian</h5>
+                    <p class="text-muted mb-0">Tracking pengembalian lebih rapi dan laporan lebih mudah.</p>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
-    <footer class="bg-dark text-white text-center py-4 mt-auto">
+    <footer class="bg-white text-center py-4 mt-auto">
         <div class="container">
-            <small>&copy; {{ date('Y') }} Sistem Peminjaman Alat. Dibuat dengan Laravel.</small>
+            <small class="text-muted">&copy; {{ date('Y') }} Sistem Peminjaman Alat. Dibuat dengan Laravel.</small>
         </div>
     </footer>
 

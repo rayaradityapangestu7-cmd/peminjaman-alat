@@ -1,133 +1,132 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mb-4">
-    <h3>Dashboard Administrator</h3>
-    <p class="text-muted">Selamat datang, {{ auth()->user()->name }}!</p>
-</div>
-
-<div class="row mb-4">
-    <div class="col-md-4">
-        <div class="card text-white bg-primary mb-3 h-100">
-            <div class="card-header">Total Pengguna</div>
-            <div class="card-body">
-                <h2 class="card-title">{{ $totalUser }}</h2>
-                <p class="card-text">User Terdaftar</p>
-            </div>
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <a href="{{ route('users.index') }}" class="text-white text-decoration-none small">Lihat
-Detail</a>
-                <span class="small">&rarr;</span>
-            </div>
+<div class="dashboard-hero text-white p-4 mb-5">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h1 class="display-6 fw-bold mb-3">Halo, {{ auth()->user()->name }}!</h1>
+            <p class="lead text-white-75">Kelola inventaris alat, pantau peminjaman, dan lihat aktivitas tim dalam satu tampilan modern.</p>
         </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="card text-white bg-success mb-3 h-100">
-            <div class="card-header">Data Alat</div>
-            <div class="card-body">
-                <h2 class="card-title">{{ $totalAlat }} <span class="fs-6">(Stok: {{ $totalStok
-}})</span></h2>
-                <p class="card-text">Jenis Alat Tersedia</p>
-            </div>
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <a href="{{ route('tools.index') }}" class="text-white text-decoration-none small">Lihat
-Detail</a>
-                <span class="small">&rarr;</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="card text-white bg-warning mb-3 h-100">
-            <div class="card-header text-dark">Kategori</div>
-            <div class="card-body text-dark">
-                <h2 class="card-title">{{ $totalKategori }}</h2>
-                <p class="card-text">Kategori Alat</p>
-            </div>
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <a href="{{ route('categories.index') }}" class="text-dark text-decoration-none
-small">Lihat Detail</a>
-                <span class="small text-dark">&rarr;</span>
-            </div>
+        <div class="col-md-4 text-md-end">
+            <a href="{{ route('tools.index') }}" class="btn btn-light btn-lg mb-2">Kelola Alat</a>
+            <a href="{{ route('admin.loans.index') }}" class="btn btn-outline-light btn-lg mb-2">Cek Peminjaman</a>
         </div>
     </div>
 </div>
-<div class="row mb-4">
+
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card dashboard-card p-4 h-100 text-primary">
+            <div class="card-header">Pengguna</div>
+            <div class="card-body">
+                <h2 class="mb-2">{{ $totalUser }}</h2>
+                <p class="text-muted mb-0">User terdaftar</p>
+            </div>
+            <div class="card-footer text-end bg-transparent p-0">
+                <a href="{{ route('users.index') }}" class="small text-primary text-decoration-none">Lihat detail &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card dashboard-card p-4 h-100 text-success">
+            <div class="card-header">Alat</div>
+            <div class="card-body">
+                <h2 class="mb-2">{{ $totalAlat }}</h2>
+                <p class="text-muted mb-0">Stok total: {{ $totalStok }}</p>
+            </div>
+            <div class="card-footer text-end bg-transparent p-0">
+                <a href="{{ route('tools.index') }}" class="small text-success text-decoration-none">Lihat detail &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card dashboard-card p-4 h-100 text-warning">
+            <div class="card-header">Kategori</div>
+            <div class="card-body">
+                <h2 class="mb-2">{{ $totalKategori }}</h2>
+                <p class="text-muted mb-0">Jenis kategori</p>
+            </div>
+            <div class="card-footer text-end bg-transparent p-0">
+                <a href="{{ route('categories.index') }}" class="small text-warning text-decoration-none">Lihat detail &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card dashboard-card p-4 h-100 text-danger">
+            <div class="card-header">Pinjaman Aktif</div>
+            <div class="card-body">
+                <h2 class="mb-2">{{ $sedangDipinjam }}</h2>
+                <p class="text-muted mb-0">Sedang dipinjam</p>
+            </div>
+            <div class="card-footer text-end bg-transparent p-0">
+                <a href="{{ route('admin.loans.index') }}" class="small text-danger text-decoration-none">Pantau &rarr;</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
     <div class="col-md-6">
-        <div class="card text-white bg-danger mb-3 h-100">
-            <div class="card-header">Sedang Dipinjam</div>
+        <div class="card dashboard-card h-100">
+            <div class="card-header">Transaksi Selesai</div>
             <div class="card-body">
-                <h2 class="card-title">{{ $sedangDipinjam }}</h2>
-                <p class="card-text">Transaksi Aktif</p>
-
-
+                <h2 class="mb-3">{{ $sudahDikembalikan }}</h2>
+                <p class="text-muted">Jumlah peminjaman yang sudah kembali.</p>
             </div>
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <a href="{{ route('admin.loans.index') }}" class="text-white text-decoration-none
-small">Pantau</a>
-                <span class="small">&rarr;</span>
+            <div class="card-footer bg-transparent text-end p-0">
+                <a href="{{ route('admin.returns.index') }}" class="small text-decoration-none">Detail pengembalian &rarr;</a>
             </div>
         </div>
     </div>
     <div class="col-md-6">
-        <div class="card text-white bg-info mb-3 h-100">
-            <div class="card-header">Sudah Dikembalikan</div>
+        <div class="card dashboard-card h-100">
             <div class="card-body">
-                <h2 class="card-title">{{ $sudahDikembalikan }}</h2>
-                <p class="card-text">Transaksi Selesai</p>
-            </div>
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <a href="{{ route('admin.returns.index') }}" class="text-white text-decoration-none
-small">Pantau</a>
-                <span class="small">&rarr;</span>
+                <h5 class="card-title">Quick Actions</h5>
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="{{ route('users.index') }}" class="btn btn-outline-primary btn-sm">User</a>
+                    <a href="{{ route('tools.index') }}" class="btn btn-outline-success btn-sm">Alat</a>
+                    <a href="{{ route('categories.index') }}" class="btn btn-outline-warning btn-sm">Kategori</a>
+                    <a href="{{ route('admin.loans.index') }}" class="btn btn-outline-danger btn-sm">Peminjaman</a>
+                    <a href="{{ route('admin.returns.index') }}" class="btn btn-outline-info btn-sm">Pengembalian</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header bg-light fw-bold">
-                Aktivitas Sistem Terakhir
-            </div>
-            <div class="card-body p-0">
-                <table class="table table-hover mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Waktu</th>
-                            <th>User</th>
-                            <th>Aksi</th>
-                            <th>Deskripsi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($recentLogs as $log)
-                        <tr>
-                            <td class="small text-muted">{{ $log->created_at->diffForHumans() }}</td>
-                            <td>
-                                <span class="fw-bold">{{ $log->user->name }}</span>
-                                <br>
-                                <span class="badge bg-secondary" style="font-size: 0.7em">{{
-ucfirst($log->user->role) }}</span>
-                            </td>
-                            <td>{{ $log->action }}</td>
-                            <td class="text-muted small">{{Str::limit($log->description, 50) }}</td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="4" class="text-center py-3">Belum ada aktivitas tercatat.</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-            <div class="card-footer text-end">
-                <a href="{{ url('/admin/logs') }}" class="btn btn-sm btn-outline-secondary">Lihat Semua
-Log</a>
-            </div>
-        </div>
+<div class="card dashboard-card">
+    <div class="card-header">Aktivitas Terbaru</div>
+    <div class="card-body p-0 table-responsive-custom">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Waktu</th>
+                    <th>User</th>
+                    <th>Aksi</th>
+                    <th>Deskripsi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($recentLogs as $log)
+                <tr>
+                    <td class="small text-muted">{{ $log->created_at->diffForHumans() }}</td>
+                    <td>
+                        <span class="fw-bold">{{ $log->user->name }}</span><br>
+                        <span class="badge bg-secondary status-chip">{{ ucfirst($log->user->role) }}</span>
+                    </td>
+                    <td>{{ $log->action }}</td>
+                    <td class="text-muted small">{{ Str::limit($log->description, 60) }}</td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="4" class="text-center py-4">Belum ada aktivitas tercatat.</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer text-end bg-transparent">
+        <a href="{{ url('/admin/logs') }}" class="btn btn-sm btn-outline-secondary">Lihat Semua Log</a>
     </div>
 </div>
 @endsection

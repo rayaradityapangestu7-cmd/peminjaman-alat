@@ -14,7 +14,7 @@ class PeminjamController extends Controller
     {
         $tools = Tool::with('category')->get();
 
-        return view('peminjam.dashboard', compact('tools'));
+        return view('peminjaman.dashboard', compact('tools'));
     }
 
     public function store(Request $request)
@@ -43,6 +43,6 @@ class PeminjamController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('peminjam.riwayat', compact('loans'));
+        return view('peminjaman.riwayat', compact('loans'));
     }
 }
