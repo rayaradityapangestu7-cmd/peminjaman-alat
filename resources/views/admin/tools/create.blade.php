@@ -4,12 +4,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card fade-in-up">
                 <div class="card-header fw-bold">Tambah Alat Baru</div>
                 <div class="card-body">
 
-                    <form action="{{ route('tools.store') }}" method="POST" enctype="multipart/form
-data">
+                    <form action="{{ route('tools.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-3">
@@ -23,12 +22,10 @@ is-invalid @enderror" value="{{ old('nama_alat') }}" required>
 
                         <div class="mb-3">
                             <label class="form-label">Kategori</label>
-                            <select name="category_id" class="form-select @error('category_id') is
-invalid @enderror" required>
+                            <select name="category_id" class="form-select @error('category_id') isinvalid @enderror" required>
                                 <option value="">-- Pilih Kategori --</option>
                                 @foreach($categories as $cat)
-                                    <option value="{{ $cat->id }}" {{ old('category_id') == $cat->id ?
-'selected' : '' }}>
+                                    <option value="{{ $cat->id }}" {{ old('category_id') == $cat->id ?'selected' : '' }}>
                                         {{ $cat->nama_kategori }}
                                     </option>
                                 @endforeach
@@ -42,8 +39,7 @@ invalid @enderror" required>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Jumlah Stok</label>
-                                <input type="number" name="stok" class="form-control @error('stok') is
-invalid @enderror" value="{{ old('stok', 1) }}" min="0" required>
+                                <input type="number" name="stok" class="form-control @error('stok') isinvalid @enderror" value="{{ old('stok', 1) }}" min="0" required>
                                 @error('stok')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -67,8 +63,8 @@ invalid @enderror" accept="image/*">
                         </div>
 
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('tools.index') }}" class="btn btn-secondary">Kembali</a>
-                            <button type="submit" class="btn btn-primary">Simpan Alat</button>
+                            <a href="{{ route('tools.index') }}" class="btn btn-secondary btn-animate">Kembali</a>
+                            <button type="submit" class="btn btn-primary btn-animate">Simpan Alat</button>
                         </div>
                     </form>
 

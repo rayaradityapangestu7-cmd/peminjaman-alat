@@ -4,7 +4,7 @@
 <div class="dashboard-hero text-white p-4 mb-5">
     <div class="row align-items-center">
         <div class="col-md-8">
-            <h1 class="display-6 fw-bold mb-3">Temukan alat yang kamu butuhkan</h1>
+            <h1 class="display-6 fw-bold mb-3 text-warning">Halo, {{ auth()->user()->name }}!</h1>
             <p class="lead text-white-75">Pilih alat, atur tanggal pengembalian, dan ajukan peminjaman dalam satu halaman dengan tampilan yang lebih bersih.</p>
         </div>
         <div class="col-md-4 text-md-end">

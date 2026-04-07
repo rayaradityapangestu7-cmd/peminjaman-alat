@@ -4,7 +4,7 @@
 <div class="dashboard-hero text-white p-4 mb-5">
     <div class="row align-items-center">
         <div class="col-md-8">
-            <h1 class="display-6 fw-bold mb-3">Halo, {{ auth()->user()->name }}!</h1>
+            <h1 class="display-6 fw-bold mb-3 text-warning">Halo, {{ auth()->user()->name }}!</h1>
             <p class="lead text-white-75">Pantau semua permintaan peminjaman dan proses pengembalian dengan cepat dari satu halaman.</p>
         </div>
         <div class="col-md-4 text-md-end">
