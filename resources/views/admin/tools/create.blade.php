@@ -35,7 +35,6 @@ invalid @enderror" required>
                             </select> 
                             @error('category_id') 
  
-17 
                                 <div class="invalid-feedback">{{ $message }}</div> 
                             @enderror 
                         </div> 

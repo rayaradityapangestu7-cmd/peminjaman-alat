@@ -64,7 +64,7 @@ perlu bolak-balik ke ruang penyimpanan.</p>
                         <p class="card-text text-muted">Proses pengajuan peminjaman yang praktis melalui 
 sistem dan persetujuan petugas yang cepat.</p> 
  
-7 
+
                     </div> 
                 </div> 
             </div> 

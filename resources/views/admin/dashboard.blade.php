@@ -61,7 +61,7 @@ small">Lihat Detail</a>
                 <h2 class="card-title">{{ $sedangDipinjam }}</h2> 
                 <p class="card-text">Transaksi Aktif</p> 
  
-9 
+
             </div> 
             <div class="card-footer d-flex justify-content-between align-items-center"> 
                 <a href="{{ route('admin.loans.index') }}" class="text-white text-decoration-none 

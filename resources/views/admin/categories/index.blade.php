@@ -17,7 +17,6 @@
                         <tr> 
                             <th width="10%">No</th> 
  
-20 
                             <th>Nama Kategori</th> 
                             <th width="20%">Jumlah Alat</th> 
                             <th width="20%">Aksi</th> 

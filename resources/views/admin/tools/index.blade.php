@@ -38,7 +38,7 @@ thumbnail" style="height: 60px;">
                             <strong>{{ $tool->nama_alat }}</strong> 
                             <div class="small text-muted text-truncate" style="max-width: 200px;"> 
  
-16 
+
                                 {{ $tool->deskripsi }} 
                             </div> 
                         </td> 

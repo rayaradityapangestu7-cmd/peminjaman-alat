@@ -3,7 +3,6 @@
 @section('content') 
 <div class="row justify-content-center"> 
  
-21 
     <div class="col-md-6"> 
         <div class="card"> 
             <div class="card-header fw-bold">Edit Kategori</div> 

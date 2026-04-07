@@ -78,7 +78,7 @@ toggle="dropdown">
                     @endforeach 
                 </ul> 
  
-6 
+
             </div> 
         @endif 
  

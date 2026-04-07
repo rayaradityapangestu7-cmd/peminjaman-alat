@@ -5,7 +5,7 @@
     <div class="card-body"> 
         <table class="table"> 
  
-33 
+
             <thead> 
                 <tr> 
                     <th>Alat</th> 

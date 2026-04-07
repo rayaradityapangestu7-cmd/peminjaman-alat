@@ -86,7 +86,7 @@ inline">
                     <th>Status</th> 
                 </tr> 
  
-31 
+
             </thead> 
             <tbody> 
                 @foreach($sudahDikembalikan as $sudah) 

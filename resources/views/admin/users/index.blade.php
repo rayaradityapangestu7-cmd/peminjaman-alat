@@ -44,7 +44,7 @@ value="{{ request('search') }}">
                             <span class="badge bg-secondary">Peminjam</span> 
                         @endif 
  
-12 
+
                     </td> 
                     <td> 
                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn
@@ -76,7 +76,6 @@ inline" onsubmit="return confirm('Yakin ingin menghapus user ini?');">
 </div> 
 @endsection 
  
-3. Buatlah file peminjaman-alat\resources\views\admin\users\create.blade.php 
 @extends('layouts.app') 
  
 @section('content') 
@@ -127,7 +126,7 @@ invalid @enderror" required minlength="6">
                     <div class="d-flex justify-content-between mt-4"> 
                         <a href="{{ route('users.index') }}" class="btn btn-secondary">Batal</a> 
  
-13 
+
                         <button type="submit" class="btn btn-primary">Simpan User</button> 
                     </div> 
                 </form> 
